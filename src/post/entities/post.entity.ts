@@ -12,5 +12,5 @@ export class Post {
   article: string;
 
   @Column({ nullable: true })
-  tags?: string[];
+  tags?: string;
 }

@@ -7,6 +7,6 @@ export class CreatePostDto {
   @IsString()
   article: string;
 
-  @IsArray()
-  tags: string[];
+  @IsString()
+  tags: string;
 }
