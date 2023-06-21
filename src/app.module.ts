@@ -7,12 +7,12 @@ import { UserModule } from './user/user.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'mysql',
+      type: 'postgres',
       host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'root',
-      database: 'test',
+      port: 5432,
+      username: 'student',
+      password: 'student',
+      database: 'rjournal',
       entities: [],
       synchronize: true,
     }),
