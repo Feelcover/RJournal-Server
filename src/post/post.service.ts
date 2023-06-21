@@ -13,8 +13,8 @@ export class PostService {
   ) {}
 
   create(createPostDto: CreatePostDto) {
-    const newPost = this.postRepository.create(createPostDto)
-    return this.postRepository.save(newPost)
+    const newPost = this.postRepository.create(createPostDto);
+    return this.postRepository.save(newPost);
   }
 
   findAll() {
@@ -26,10 +26,10 @@ export class PostService {
   }
 
   update(id: number, updatePostDto: UpdatePostDto) {
-    return `This action updates a #${id} post`;
+    return this.postRepository.update(id, updatePostDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} post`;
+    return this.postRepository.delete(id);
   }
 }
