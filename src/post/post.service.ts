@@ -9,19 +9,20 @@ import { Repository } from 'typeorm';
 export class PostService {
   constructor(
     @InjectRepository(Post)
-    private repository: Repository<Post>,
+    private postRepository: Repository<Post>,
   ) {}
 
   create(createPostDto: CreatePostDto) {
-    return 'This action adds a new post';
+    const newPost = this.postRepository.create(createPostDto)
+    return this.postRepository.save(newPost)
   }
 
   findAll() {
-    return `This action returns all post`;
+    return this.postRepository.find();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} post`;
+    return this.postRepository.findOne(id);
   }
 
   update(id: number, updatePostDto: UpdatePostDto) {
