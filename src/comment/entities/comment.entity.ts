@@ -1,3 +1,4 @@
+import { Post } from 'src/post/entities/post.entity';
 import { User } from 'src/user/entities/user.entity';
 import { MainEntity } from 'src/utils/MainEntity';
 import { Entity, Column, ManyToOne, JoinColumn } from 'typeorm';
@@ -10,4 +11,8 @@ export class Comment extends MainEntity {
   @ManyToOne(() => User)
   @JoinColumn({ name: 'userId' })
   user: User;
+
+  @ManyToOne(() => Post)
+  @JoinColumn({ name: 'postId' })
+  post: Post;
 }
