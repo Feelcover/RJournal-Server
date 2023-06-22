@@ -13,7 +13,10 @@ export class CommentService {
   ) {}
 
   create(createCommentDto: CreateCommentDto) {
-    const newComment = this.postRepository.create(createCommentDto);
+    const newComment = this.postRepository.create({
+      text: createCommentDto.text,
+      post: { id: createCommentDto.postId },
+    });
     return this.postRepository.save(newComment);
   }
 
