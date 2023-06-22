@@ -8,5 +8,5 @@ export class CreatePostDto {
   article: string;
 
   @IsString()
-  tags: string;
+  tags?: string;
 }
