@@ -1,4 +1,5 @@
 import { MainEntity } from 'src/utils/MainEntity';
+
 import { Entity, Column } from 'typeorm';
 
 @Entity()
@@ -11,4 +12,5 @@ export class Post extends MainEntity {
 
   @Column({ nullable: true })
   tags?: string;
+
 }

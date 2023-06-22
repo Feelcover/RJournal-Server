@@ -13,11 +13,12 @@ export class CommentService {
   ) {}
 
   create(createCommentDto: CreateCommentDto) {
-    const newComment = this.postRepository.create({
+    return this.postRepository.save({
       text: createCommentDto.text,
       post: { id: createCommentDto.postId },
+      user: { id: 1 },
+
     });
-    return this.postRepository.save(newComment);
   }
 
   findAll() {

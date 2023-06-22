@@ -8,11 +8,11 @@ export class Comment extends MainEntity {
   @Column()
   text: string;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, { nullable: false })
   @JoinColumn({ name: 'userId' })
   user: User;
 
-  @ManyToOne(() => Post)
+  @ManyToOne(() => Post, { nullable: false })
   @JoinColumn({ name: 'postId' })
   post: Post;
 }

@@ -1,3 +1,4 @@
+import { timestamp } from 'rxjs';
 import { Entity, PrimaryGeneratedColumn,  CreateDateColumn,
     UpdateDateColumn, } from 'typeorm';
 
@@ -6,9 +7,9 @@ export abstract class MainEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @CreateDateColumn()
+  @CreateDateColumn({type: "timestamp"})
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({type: "timestamp"})
   updatedAt: Date;
 }

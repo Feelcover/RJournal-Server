@@ -3,6 +3,7 @@ import { Entity, Column } from 'typeorm';
 
 @Entity()
 export class User extends MainEntity {
+
   @Column()
   fullName: string;
 
