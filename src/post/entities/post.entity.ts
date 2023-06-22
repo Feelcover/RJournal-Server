@@ -1,10 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { MainEntity } from 'src/utils/MainEntity';
+import { Entity, Column } from 'typeorm';
 
 @Entity()
-export class Post {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class Post extends MainEntity {
   @Column()
   title: string;
 
