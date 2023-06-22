@@ -4,6 +4,8 @@ import { User } from './user/entities/user.entity';
 import { UserModule } from './user/user.module';
 import { PostModule } from './post/post.module';
 import { Post } from './post/entities/post.entity';
+import { CommentModule } from './comment/comment.module';
+import { Comment } from './comment/entities/comment.entity';
 
 @Module({
   imports: [
@@ -14,11 +16,12 @@ import { Post } from './post/entities/post.entity';
       username: 'student',
       password: 'student',
       database: 'rjournal',
-      entities: [User, Post],
+      entities: [User, Post, Comment],
       synchronize: true,
     }),
     UserModule,
     PostModule,
+    CommentModule,
   ],
   controllers: [],
   providers: [],
