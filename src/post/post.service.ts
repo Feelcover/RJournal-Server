@@ -38,7 +38,11 @@ export class PostService {
     return this.postRepository.update(id, updatePostDto);
   }
 
-  remove(id: number) {
+  async remove(id: number) {
+    const post = await this.postRepository.findOne(id);
+    if (!post) {
+      throw new NotFoundException('Пост не найден');
+    }
     return this.postRepository.delete(id);
   }
 }
