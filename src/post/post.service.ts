@@ -24,7 +24,7 @@ export class PostService {
   async findOne(id: number) {
     const post = await this.postRepository.findOne(id);
     if (!post) {
-      throw new NotFoundException('Пост не найден')
+      throw new NotFoundException('Пост не найден');
     }
     return post;
   }
@@ -32,9 +32,9 @@ export class PostService {
   async update(id: number, updatePostDto: UpdatePostDto) {
     const post = await this.postRepository.findOne(id);
     if (!post) {
-      throw new NotFoundException('Пост не найден')
+      throw new NotFoundException('Пост не найден');
     }
-    
+
     return this.postRepository.update(id, updatePostDto);
   }
 
