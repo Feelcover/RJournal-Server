@@ -4,6 +4,7 @@ import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { Post } from './entities/post.entity';
 import { Repository } from 'typeorm';
+import { SearchPostDto } from './dto/search-post.dto';
 
 @Injectable()
 export class PostService {
@@ -19,9 +20,9 @@ export class PostService {
 
   findAll() {
     return this.postRepository.find({
-      order:{
-        createdAt: "DESC",
-      }
+      order: {
+        createdAt: 'DESC',
+      },
     });
   }
 
@@ -31,15 +32,25 @@ export class PostService {
     queryBuilder.limit(5);
     const [items, total] = await queryBuilder.getManyAndCount();
 
+    return { items, total };
+  }
 
-    return {items, total}
+  search(searchPostDto: SearchPostDto) {
+    return this.postRepository.find({
+      order: {
+        createdAt: 'DESC',
+      },
+    });
   }
 
   async findOne(id: number) {
     const post = await this.postRepository.findOne(id);
     if (!post) {
       throw new NotFoundException('Пост не найден');
-    } 
+    }
+    post.views += 1;
+    await this.postRepository.save(post);
+
     return post;
   }
 
