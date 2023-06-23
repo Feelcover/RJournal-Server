@@ -15,5 +15,9 @@ export class SearchPostDto {
   @IsString()
   tags: string;
 
+  limit: number;
+
+  take: number;
+
   views: PostViewsEnum;
 }

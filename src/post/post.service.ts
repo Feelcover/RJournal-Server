@@ -27,7 +27,7 @@ export class PostService {
   }
 
   async findPopular() {
-    const queryBuilder = this.postRepository.createQueryBuilder('p');
+    const queryBuilder = this.postRepository.createQueryBuilder();
     queryBuilder.orderBy('views', 'DESC');
     queryBuilder.limit(5);
     const [items, total] = await queryBuilder.getManyAndCount();
@@ -36,11 +36,10 @@ export class PostService {
   }
 
   search(searchPostDto: SearchPostDto) {
-    return this.postRepository.find({
-      order: {
-        createdAt: 'DESC',
-      },
-    });
+    const queryBuilder = this.postRepository.createQueryBuilder();
+    queryBuilder.limit(10)
+    
+    return
   }
 
   async findOne(id: number) {
