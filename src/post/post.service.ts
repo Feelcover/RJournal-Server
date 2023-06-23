@@ -35,7 +35,7 @@ export class PostService {
     return { items, total };
   }
 
- async search(searchPostDto: SearchPostDto) {
+  async search(searchPostDto: SearchPostDto) {
     const queryBuilder = this.postRepository.createQueryBuilder('p');
 
     queryBuilder.limit(searchPostDto.limit || 0);
@@ -59,8 +59,7 @@ export class PostService {
 
     const [items, total] = await queryBuilder.getManyAndCount();
 
-    
-    return {items, total};
+    return { items, total };
   }
 
   async findOne(id: number) {
