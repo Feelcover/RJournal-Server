@@ -13,4 +13,6 @@ export class Post extends MainEntity {
   @Column({ nullable: true })
   tags?: string;
 
+  @Column({ default: 0 })
+  views: number;
 }

@@ -21,11 +21,19 @@ export class PostService {
     return this.postRepository.find();
   }
 
+  findPopular() {
+    return this.postRepository.find({
+      order: {
+        views: 'DESC',
+      },
+    });
+  }
+
   async findOne(id: number) {
     const post = await this.postRepository.findOne(id);
     if (!post) {
       throw new NotFoundException('Пост не найден');
-    }
+    } 
     return post;
   }
 
