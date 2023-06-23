@@ -9,7 +9,7 @@ export class SearchPostDto {
   article?: string;
 
   @IsString()
-  tags?: string;
+  tag?: string;
 
   limit?: number;
 

@@ -35,8 +35,8 @@ export class PostService {
     return { items, total };
   }
 
-  search(searchPostDto: SearchPostDto) {
-    const queryBuilder = this.postRepository.createQueryBuilder();
+ async search(searchPostDto: SearchPostDto) {
+    const queryBuilder = this.postRepository.createQueryBuilder('p');
 
     queryBuilder.limit(searchPostDto.limit || 0);
     queryBuilder.take(searchPostDto.take || 10);
@@ -44,7 +44,23 @@ export class PostService {
     if (searchPostDto.views) {
       queryBuilder.orderBy('views', searchPostDto.views);
     }
-    return;
+
+    if (searchPostDto.article) {
+      queryBuilder.where(`p.article ILIKE %${searchPostDto.article}%`);
+    }
+
+    if (searchPostDto.title) {
+      queryBuilder.where(`p.title ILIKE %${searchPostDto.title}%`);
+    }
+
+    if (searchPostDto.tag) {
+      queryBuilder.where(`p.tag ILIKE %${searchPostDto.tag}%`);
+    }
+
+    const [items, total] = await queryBuilder.getManyAndCount();
+
+    
+    return {items, total};
   }
 
   async findOne(id: number) {
