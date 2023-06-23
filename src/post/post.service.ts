@@ -18,7 +18,11 @@ export class PostService {
   }
 
   findAll() {
-    return this.postRepository.find();
+    return this.postRepository.find({
+      order:{
+        createdAt: "DESC",
+      }
+    });
   }
 
   async findPopular() {
