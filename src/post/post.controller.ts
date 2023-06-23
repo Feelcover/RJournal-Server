@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { PostService } from './post.service';
 import { CreatePostDto } from './dto/create-post.dto';
@@ -32,7 +33,7 @@ export class PostController {
   }
 
   @Get("/search")
-  searchPosts(@Body() SearchPostDto:SearchPostDto) {
+  searchPosts(@Query() SearchPostDto:SearchPostDto) {
     return this.postService.search(SearchPostDto);
   }
 

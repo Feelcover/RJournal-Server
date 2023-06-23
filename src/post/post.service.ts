@@ -41,20 +41,26 @@ export class PostService {
     queryBuilder.limit(searchPostDto.limit || 0);
     queryBuilder.take(searchPostDto.take || 10);
 
+    queryBuilder.setParameters({
+      title: `%${searchPostDto.title}%`,
+      article: `%${searchPostDto.article}%`,
+      tags: `%${searchPostDto.tags}%`,
+    });
+
     if (searchPostDto.views) {
       queryBuilder.orderBy('views', searchPostDto.views);
     }
+    0;
+    if (searchPostDto.title) {
+      queryBuilder.where(`p.title ILIKE :title`);
+    }
 
     if (searchPostDto.article) {
-      queryBuilder.where(`p.article ILIKE %${searchPostDto.article}%`);
+      queryBuilder.where(`p.article ILIKE :article`);
     }
 
-    if (searchPostDto.title) {
-      queryBuilder.where(`p.title ILIKE %${searchPostDto.title}%`);
-    }
-
-    if (searchPostDto.tag) {
-      queryBuilder.where(`p.tag ILIKE %${searchPostDto.tag}%`);
+    if (searchPostDto.tags) {
+      queryBuilder.where(`p.tags ILIKE :tags`);
     }
 
     const [items, total] = await queryBuilder.getManyAndCount();

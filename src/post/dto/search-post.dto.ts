@@ -4,7 +4,7 @@ export class SearchPostDto {
 
   article?: string;
 
-  tag?: string;
+  tags?: string;
 
   limit?: number;
 
