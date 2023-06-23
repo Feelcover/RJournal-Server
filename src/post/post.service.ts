@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { Post } from './entities/post.entity';
-import { Repository } from 'typeorm';
+import { getManager, Repository } from 'typeorm';
 import { SearchPostDto } from './dto/search-post.dto';
 
 @Injectable()
@@ -69,20 +69,43 @@ export class PostService {
   }
 
   async findOne(id: number) {
-    const post = await this.postRepository.findOne(id);
-    if (!post) {
-      throw new NotFoundException('Пост не найден');
-    }
-    post.views += 1;
-    await this.postRepository.save(post);
+    const entityManager = getManager();
 
-    return post;
+    try {
+      const post = await entityManager.transaction(
+        async (transactionManager) => {
+          const post = await transactionManager.findOne(Post, id);
+          if (!post) {
+            throw new NotFoundException('Пост не найден');
+          }
+
+          post.views += 1;
+          await transactionManager.save(post);
+
+          return post;
+        },
+      );
+
+      return post;
+    } catch (error) {
+      throw new Error('Произошла ошибка при увеличении счетчика просмотров');
+    }
   }
 
   async update(id: number, updatePostDto: UpdatePostDto) {
     const post = await this.postRepository.findOne(id);
     if (!post) {
       throw new NotFoundException('Пост не найден');
+    }
+    const entityManager = getManager();
+
+    try {
+      await entityManager.transaction(async (transactionManager) => {
+        post.views += 1;
+        await transactionManager.save(post);
+      });
+    } catch (error) {
+      throw new Error('Произошла ошибка при увеличении счетчика просмотров');
     }
 
     return this.postRepository.update(id, updatePostDto);
