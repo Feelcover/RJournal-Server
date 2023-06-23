@@ -1,23 +1,19 @@
 import { IsString } from 'class-validator';
 
-enum PostViewsEnum {
-  DESC = 'DESC',
-  ASC = 'ASC',
-}
 
 export class SearchPostDto {
   @IsString()
-  title: string;
+  title?: string;
 
   @IsString()
-  article: string;
+  article?: string;
 
   @IsString()
-  tags: string;
+  tags?: string;
 
-  limit: number;
+  limit?: number;
 
-  take: number;
+  take?: number;
 
-  views: PostViewsEnum;
+  views?: "DESC" | "ASC";
 }

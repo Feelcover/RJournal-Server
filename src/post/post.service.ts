@@ -37,9 +37,14 @@ export class PostService {
 
   search(searchPostDto: SearchPostDto) {
     const queryBuilder = this.postRepository.createQueryBuilder();
-    queryBuilder.limit(10)
-    
-    return
+
+    queryBuilder.limit(searchPostDto.limit || 0);
+    queryBuilder.take(searchPostDto.take || 10);
+
+    if (searchPostDto.views) {
+      queryBuilder.orderBy('views', searchPostDto.views);
+    }
+    return;
   }
 
   async findOne(id: number) {
