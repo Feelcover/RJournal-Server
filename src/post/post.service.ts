@@ -52,15 +52,15 @@ export class PostService {
     }
     0;
     if (searchPostDto.title) {
-      queryBuilder.where(`p.title ILIKE :title`);
+      queryBuilder.andWhere(`p.title ILIKE :title`);
     }
 
     if (searchPostDto.article) {
-      queryBuilder.where(`p.article ILIKE :article`);
+      queryBuilder.andWhere(`p.article ILIKE :article`);
     }
 
     if (searchPostDto.tags) {
-      queryBuilder.where(`p.tags ILIKE :tags`);
+      queryBuilder.andWhere(`p.tags ILIKE :tags`);
     }
 
     const [items, total] = await queryBuilder.getManyAndCount();

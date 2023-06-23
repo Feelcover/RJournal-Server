@@ -27,13 +27,13 @@ export class PostController {
     return this.postService.findAll();
   }
 
-  @Get("/popular")
+  @Get('/popular')
   findPopular() {
     return this.postService.findPopular();
   }
 
-  @Get("/search")
-  searchPosts(@Query() SearchPostDto:SearchPostDto) {
+  @Get('/search')
+  searchPosts(@Query() SearchPostDto: SearchPostDto) {
     return this.postService.search(SearchPostDto);
   }
 
