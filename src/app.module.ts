@@ -6,6 +6,7 @@ import { PostModule } from './post/post.module';
 import { Post } from './post/entities/post.entity';
 import { CommentModule } from './comment/comment.module';
 import { Comment } from './comment/entities/comment.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { Comment } from './comment/entities/comment.entity';
     UserModule,
     PostModule,
     CommentModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
