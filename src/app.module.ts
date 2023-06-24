@@ -7,6 +7,7 @@ import { Post } from './post/entities/post.entity';
 import { CommentModule } from './comment/comment.module';
 import { Comment } from './comment/entities/comment.entity';
 import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
