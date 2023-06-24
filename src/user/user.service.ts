@@ -4,6 +4,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
+import { LoginUserDto } from './dto/login-user.dto';
 
 @Injectable()
 export class UserService {
@@ -23,6 +24,10 @@ export class UserService {
 
   findOne(id: number) {
     return this.userRepository.findOne(id);
+  }
+
+  findByCond(cond: LoginUserDto) {
+    return this.userRepository.findOne(cond);
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {

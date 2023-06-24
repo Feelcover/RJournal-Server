@@ -4,8 +4,11 @@ import { UserService } from 'src/user/user.service';
 export class AuthService {
   constructor(private userService: UserService) {}
 
-  async validateUser(username: string, password: string): Promise<any> {
-    const user = await this.userService.findOne(username);
+  async validateUser(email: string, password: string): Promise<any> {
+    const user = await this.userService.findByCond({
+      email,
+      password,
+    });
 
     if (user && user.password === password) {
       const { password, ...result } = user;
