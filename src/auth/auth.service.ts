@@ -26,6 +26,7 @@ export class AuthService {
 
   jwtGenerate(data: { id: number; email: string }) {
     const payload = { email: data.email, sub: data.id };
+    return this.jwtService.sign(payload);
   }
 
   async login(user: User) {
