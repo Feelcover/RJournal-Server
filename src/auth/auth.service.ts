@@ -38,11 +38,13 @@ export class AuthService {
   }
 
   async register(createUserDto: CreateUserDto) {
-    const { password, ...user } = await this.userService.create(createUserDto);
+    const { password, ...newUser } = await this.userService.create(
+      createUserDto,
+    );
 
     return {
-      ...user,
-      access_token: this.jwtGenerate(user),
+      ...newUser,
+      access_token: this.jwtGenerate(newUser),
     };
   }
 }
