@@ -42,7 +42,7 @@ export class AuthService {
 
     return {
       ...user,
-      access_token: this.jwtService.sign(user),
+      access_token: this.jwtGenerate(user),
     };
   }
 }
