@@ -9,8 +9,7 @@ import { UserService } from 'src/user/user.service';
 export class AuthController {
   constructor(
     private readonly authService: AuthService,
-    private readonly userService: UserService,
-  ) { }
+  ) {}
 
   @UseGuards(LocalAuthGuard)
   @Post('login')
@@ -26,6 +25,6 @@ export class AuthController {
 
   @Post('register')
   register(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
+    return this.authService.register(createUserDto);
   }
 }
