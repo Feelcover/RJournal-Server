@@ -24,6 +24,10 @@ export class AuthService {
     return null;
   }
 
+  jwtGenerate(data: { id: number; email: string }) {
+    const payload = { email: data.email, sub: data.id };
+  }
+
   async login(user: User) {
     const { password, ...userData } = user;
     const payload = { email: user.email, sub: user.id };
@@ -34,11 +38,11 @@ export class AuthService {
   }
 
   async register(createUserDto: CreateUserDto) {
-    const { password, ...userData } = user;
-    const payload = { email: user.email, sub: user.id };
+    const { password, ...user } = await this.userService.create(createUserDto);
+
     return {
-      ...userData,
-      access_token: this.jwtService.sign(payload),
+      ...user,
+      access_token: this.jwtService.sign(user),
     };
   }
 }
