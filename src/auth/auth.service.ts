@@ -48,7 +48,7 @@ export class AuthService {
         access_token: this.jwtGenerate(newUser),
       };
     } catch (err) {
-      throw new ForbiddenException("Ошибка регистрации, такой пользователь уже существует");
+      throw new ForbiddenException("Ошибка регистрации");
     }
   }
 }
