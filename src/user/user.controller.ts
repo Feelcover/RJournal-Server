@@ -37,15 +37,15 @@ export class UserController {
     return this.userService.search(searchUserDto);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
-  }
-
   @UseGuards(JwtAuthGuard)
   @Patch('me')
   update(@Request() req, @Body() updateUserDto: UpdateUserDto) {
     return this.userService.update(+req.user.id, updateUserDto);
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.userService.findOne(+id);
   }
 
 }

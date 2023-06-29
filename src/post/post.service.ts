@@ -50,7 +50,7 @@ export class PostService {
     if (searchPostDto.views) {
       queryBuilder.orderBy('views', searchPostDto.views);
     }
-    0;
+
     if (searchPostDto.title) {
       queryBuilder.andWhere(`p.title ILIKE :title`);
     }
