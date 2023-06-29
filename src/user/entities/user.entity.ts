@@ -7,7 +7,7 @@ export class User extends MainEntity {
   @Column()
   fullName: string;
 
-  @Column()
+  @Column({unique:true})
   email: string;
 
   @Column()

@@ -42,13 +42,13 @@ export class AuthService {
       const { password, ...newUser } = await this.userService.create(
         createUserDto,
       );
-  
+
       return {
         ...newUser,
         access_token: this.jwtGenerate(newUser),
       };
     } catch (err) {
-      throw new ForbiddenException(err)
+      throw new ForbiddenException("Ошибка регистрации, такой пользователь уже существует");
     }
   }
 }
