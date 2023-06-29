@@ -25,6 +25,8 @@ export class UserController {
   @UseGuards(JwtAuthGuard)
   @Get('me')
   getProfile(@Request() req) {
+    console.log(req);
+    
     return req.user;
   }
 
@@ -33,14 +35,10 @@ export class UserController {
     return this.userService.findOne(+id);
   }
 
-  // @UseGuards(JwtAuthGuard)
-  // @Patch('me')
-  // update(@Request() req, @Body() updateUserDto: UpdateUserDto) {
-  //   return this.userService.update(+id, updateUserDto);
-  // }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
+  @UseGuards(JwtAuthGuard)
+  @Patch('me')
+  update(@Request() req, @Body() updateUserDto: UpdateUserDto) {
+    return this.userService.update(+req.user.id, updateUserDto);
   }
+
 }
