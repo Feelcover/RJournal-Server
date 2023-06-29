@@ -30,6 +30,11 @@ export class UserController {
     return req.user;
   }
 
+  @Get('search')
+  search(@Param('id') id: string) {
+    return this.userService.search(+id);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.userService.findOne(+id);
